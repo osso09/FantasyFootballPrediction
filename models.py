@@ -17,6 +17,7 @@ import time
 from metrics import mean_relative_error
 from plots import histogram
 import random
+import sys
 
 def hyperparameter_selection(regressors, x, y, folds):
     k_fold = cross_validation.StratifiedKFold(y, n_folds=folds)
@@ -88,7 +89,11 @@ if FEATURE_SELECTION:
 #TODO modify this to randomly selected
 elif MANUAL_FEATURE_SELECTION: # leave out the two point attempts
     #manual_indices = [0, 1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 17, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33]
-    manual_indices = sorted(random.sample(range(0,34), random.randint(1,34)))
+    #manual_indices = sorted(random.sample(range(0,34), random.randint(1,34)))
+    
+    #mode for command line argument indices
+    manual_indices=sorted(random.sample((sys.argv[1:]),len(sys.argv)-1))
+    manual_indices = map(int,manual_indices)
     print "indices used: ", manual_indices
     train_x = train_x[:, manual_indices]
     test_x = test_x[:, manual_indices]
@@ -123,19 +128,27 @@ prediction = best_regressor.predict(test_x)
 
 np.save('prediction.npy', prediction)
 
-print 'RMSE, MAE, MRE (all):', mean_squared_error(test_y, prediction)**0.5, \
-    mean_absolute_error(test_y, prediction), \
-    mean_relative_error(test_y, prediction)
-
+# print 'RMSE, MAE, MRE (all):', mean_squared_error(test_y, prediction)**0.5, \
+#     mean_absolute_error(test_y, prediction), \
+#     mean_relative_error(test_y, prediction)
+print("Indices\tRMSE\tMAE\tMRE\t")
 # determine error if only best 24 players are selected
 indices = []
 for index in range(len(test_x)):
     if test[index, 0] in test_players.keys():
         indices.append(index)
-print 'RMSE, MAE, MRE (24 best):', mean_squared_error(test_y[indices], prediction[indices])**0.5, \
-    mean_absolute_error(test_y[indices], prediction[indices]), \
-    mean_relative_error(test_y[indices], prediction[indices])
-print zip(test_y[indices], prediction[indices])
+	# # print 'RMSE, MAE, MRE (player):' , test[index,1], mean_squared_error(test_y[indices], prediction[indices])**0.5, \
+	#     mean_absolute_error(test_y[indices], prediction[indices]), \
+	#     mean_relative_error(test_y[indices], prediction[indices])
+
+	#weekly basis
+	#Figure out the unit of errors 
+	print manual_indices,"\t", test[index,1],"\t", mean_squared_error(test_y[indices], prediction[indices])**0.5,"\t", \
+	    mean_absolute_error(test_y[indices], prediction[indices]),"\t", \
+	    mean_relative_error(test_y[indices], prediction[indices])
+
+	indices = []
+	#print zip(test_y[indices], prediction[indices])
 
 if HISTOGRAM:
     histogram(test_y, prediction)
