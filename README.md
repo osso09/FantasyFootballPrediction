@@ -16,7 +16,7 @@ $ sudo apt-get install pip<br/>
 $ pip install --upgrade python<br/>
 $ sudo pip install numpy<br/>
 $ sudo pip install pybrain<br/>
-$ sudo pip install scipi<br/>
+$ sudo pip install scipy<br/>
 $ sudo pip install sklearn<br/>
 $ sudo pip install matplotlib<br/>
 $ pip install nflgame<br/>
