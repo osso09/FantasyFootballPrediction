@@ -4,7 +4,7 @@ We are investigating methods for improving fantasy football prediction models.
 
 This project is expanding on work provided by https://github.com/romanlutz/fantasy-football-prediction.
 
-It uses the An API to retrieve and read NFL Game Center JSON data.<br/> 
+An API is used in this project to retrieve and read NFL Game Center JSON data.<br/> 
 This API can be found at https://github.com/BurntSushi/nflgame
 
 
