@@ -20,8 +20,9 @@ $ sudo pip install scipi<br/>
 $ sudo pip install sklearn<br/>
 $ sudo pip install matplotlib<br/>
 $ pip install nflgame<br/>
+$ pip install jupyter<br/>
 
-**The following updates data for the datasets used for the machine learning from nflgame:<br/>**
+**The following commands update the datasets used for machine learning from nflgame:<br/>**
 $ sudo nflgame-update-players<br/>
 $ python get_data.py<br/>
 $ python create_datasets.py<br/>
