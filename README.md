@@ -26,6 +26,9 @@ $ pip install jupyter<br/>
 $ sudo nflgame-update-players<br/>
 $ python get_data.py<br/>
 $ python create_datasets.py<br/>
+
+**The following commands can be used to generate predictions for the data. Models is the SVM/Linear Regression Model:<br/>**
 $ python neural_net.py<br/>
+$ python models.py<br/>
   
   
